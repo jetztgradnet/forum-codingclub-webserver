@@ -1,0 +1,26 @@
+/*!
+ *  Font Awesome v4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
+ @import url('/css/font-awesome-css.min.css');
+ @font-face {
+   font-family: 'FontAwesome';
+   src: url('/css/fontawesome-webfont.woff2') format('woff2');
+   font-weight: normal;
+   font-style: normal;
+}
+
+body {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+.sichtbar {
+    border: 1px solid;
+}

@@ -1,0 +1,691 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>/forum/CodeClub: Build a webserver!</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<style>
+			.reveal section p {
+				font-weight: normal !important;
+				font-size: 0.7em !important;
+			}
+
+			.reveal section pre code {
+				font-size: 0.7em !important;
+			}
+			img {
+				border-style: none !important;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>/forum/CodeClub: Build a webserver!</h2>
+
+					<p>
+						Das Internet steckt heute in jeder Hosentasche und Webseiten und Apps regieren den Alltag. 
+						Aber wie funktionieren eigentlich dieses Internet und verbreitete Dienste wie WhatsApp? 
+						Und warum sind Programmierer heute so gefragt? Kann ich sowas auch selbst machen? Natürlich!
+					</p>
+				</section>
+				
+				<section>
+					Wer ist eigentlich heute so da?<br>
+					<br>
+					Stellt Euch doch mal kurz vor!<br>
+					<br>
+					<small>Und vielleicht auch, ob/was Ihr schonmal programmiert habt und was Ihr heute gerne erreichen wollt</small>
+				</section>
+				
+				<section>
+					<h2>Was machen wir heute?</h2>
+
+					<p>
+						Wir programmieren gemeinsam einen einfachen Webserver als Chatsystem und lernen dabei etwas über 
+						Netzwerke, Programmieren mit JavaScript und Node.js, Browser und Webserver. 
+					</p>
+				</section>
+				
+				<section>
+					<h2>Kurzer Hinweis</h2>
+
+					<p>
+						Der Großteil dieser Präsentation und des Workshop-Materials ist auf Deutsch, allerdings enthalten die 
+						verwendeten Programmiersprachen viele englische Begriffe.<br>
+						Referenzen auf weiterführende Seiten sind sind wo möglich ebenfalls auf Deutsch, aber im Internet gibt es sehr viel 
+						gute Dokumentation auf Englisch, insofern sind Englischkenntnisse von Vorteil ;-)
+					</p>
+
+					<img width="300px" src="bilder/Englische-Flagge.png">
+				</section>
+				
+				<section>
+					<section>
+						Der Plan
+					</section>
+					
+					<section>
+						Kurze Einführung:<br>
+						<br>
+						Linux, Raspi, Kommandozeile (Terminal)<br>
+						Browser, HTML, CSS<br>
+						WebServer, JavaScript<br>
+						<br>
+						Programmieren eines Chatservers!<br>
+					</section>
+
+					<section>
+						Fragen zum Ablauf des Workshops?
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						Unser Computer heute
+					</section>
+
+					<section>
+						<a href="https://www.raspberrypi.org/products/raspberry-pi-4-model-b/"><img height="60px" src="bilder/RPi-Logo-Landscape.png"></a>
+						<br>
+						günstiger Mini-Computer (~35 EUR)<br>
+
+						<img height="400px" src="bilder/Raspberry-Pi-4.jpg">
+					</section>
+					
+					<section>
+						<a href="https://de.wikipedia.org/wiki/Linux">Linux</a> (<a href="https://www.raspberrypi.org/downloads/raspbian/">Raspbian</a>)
+						<br>
+						<a href="https://de.wikipedia.org/wiki/Open_Source">Open Source</a>-<a href="https://de.wikipedia.org/wiki/Betriebssystem">Betriebssystem</a>
+						<br>
+						<img height="400px" src="bilder/Tux.png">
+						<br>
+					</section>
+
+					<section>
+						Selber machen: Terminal öffen und das Dateisystem erforschen<br>
+						<br>
+						<code>cd, ls, mkdir, rm, rm -rf</code><br>
+						<br>
+						Ein paar Hinweise findet Ihr auf <a href="https://www.ernstlx.com/linux90bash.html">https://www.ernstlx.com/linux90bash.html</a>.<br>
+						<br>
+						10 Minuten
+					</section>
+				</section>
+
+				<section>
+					<section>
+						Was bedeutet Programmieren?
+					</section>
+
+					<section>
+						Was bedeutet Web-Programmierung?
+
+						<img src="bilder/workshop-wordcloud.png">
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						Los geht's!
+					</section>
+
+					<section>
+						Das wollen wir heute bauen: einen ChatServer<br>
+						<img src="bilder/ChatServer.png">
+					</section>
+
+					<section>
+						Kurze Demo...
+					</section>
+
+					<section>
+						Diese Präsentation und alle Dateien herunterladen:<br>
+						<a href="http://files.jetztgrad.net/webserver/webserver.zip">http://files.jetztgrad.net/webserver/webserver.zip</a><br>
+						<br>
+						Bitte Runterladen und Auspacken, am besten in den Dokumenten-Ordner....<br>
+					</section>
+
+					<section>
+						Eure eigene Version dieser Präsentation findet Ihr im Ordner <code>webserver/workshop/index.html</code><br>
+						<br>
+						Außerdem hilfreich: der <a href="spickzettel.html">Spickzettel</a>: <code>webserver/workshop/spickzettel.html</code>
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						Eine einfache <a href="https://forum-mannheim.de/">Webseite</a>:<br>
+						<img src="bilder/Eine-Webseite.png">
+					</section>
+					
+					<section>
+						Schauen wir doch mal rein!<br>
+						<br>
+						Ein Browser hat alles dabei, um unter die Haube zu schauen:<br>
+
+						Developer Tools für Neugierige!
+					</section>
+
+					<section>
+						Der Seitenquelltext:<br>
+						<img src="bilder/Eine-Webseite-Quelltext.png">
+					</section>
+					
+					<section>
+						Netzwerkansicht: was wird alles vom WebServer geladen<br>
+						<img src="bilder/Eine-Webseite-DevTools-Netzwerk.png">
+					</section>
+					
+					<section>
+						<i>Element Untersuchen</i> (Inspect) erlaubt den Blick ins innere: der Document Object Tree (DOM)<br>
+						<img src="bilder/Eine-Webseite-DevTools-Inspect.png">
+					</section>
+
+					<section>
+						Kurze Demo...
+					</section>
+				</section>
+				
+				
+				
+				<section>
+					<section>
+						Kurze Einführung zu HTML
+					</section>
+
+					<section>
+						Selber machen: eine einfache HTML-Seite mit unseren Namen<br>
+						<br>
+						Ein Grundgerüst zum Kopieren findet Ihr auf <a href="https://wiki.selfhtml.org/wiki/HTML">https://wiki.selfhtml.org/wiki/HTML</a>.<br>
+						<br>
+						10 Minuten
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						Kurze Einführung zu CSS
+					</section>
+
+					<section>
+						Selber machen: wir machen unsere HTML-Seite etwas bunt<br>
+						<br>
+						Eine Einführung in CSS findet Ihr auf <a href="https://wiki.selfhtml.org/wiki/CSS">https://wiki.selfhtml.org/wiki/CSS</a>.<br>
+						<br>
+						10 Minuten
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						Kurze Einführung zu JavaScript
+					</section>
+
+					<section>
+						Selber machen: wir bauen etwas JavaScript ein<br>
+						<br>
+						Ziel: ein Knopf, der etwas auf der Console ausgibt, wenn man ihn drückt<br>
+						<br>
+						Hinweis: HTML-Formular, <code>onsubmit='tuwas()'</code>
+						<br>
+						Einen Startpunkt zu JavaScript findet Ihr auf <a href="https://developer.mozilla.org/de/docs/Web/JavaScript">https://developer.mozilla.org/de/docs/Web/JavaScript</a>.<br>
+						<br>
+						10 Minuten
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						Nochmal der Plan:<br>
+						<br>
+						<ul>
+							<li>was wollen wir erreichen?</li>
+							<li>wie gehen wir vor?</li>
+						</ul>
+						<br>
+						<br>
+						Am besten in vielen kleinen Schritten!
+					</section>
+
+					<section>
+						Klassische Aufgabenteilung:<br>
+						<br>
+						Frontend für die Benutzeroberfläche (im Browser)<br>
+						Backend für die Schwerarbeit (der Webserver!)<br>
+					</section>
+
+					<section>
+						Frontend (im Browser)<br>
+						<br>
+						Habt Ihr schon gemacht, siehe die Beispiele oben!
+					</section>
+
+					<section>
+						Backend (der WebServer)<br>
+						<br>
+						<code>nodejs</code>!<br>
+						<br>
+						<small>
+							Rezept für JavaScript auf dem Backend: man nehme die JavaScript-Maschine aus Chromium/Chrome und mache sie selbstständig lauffähig. 
+							Noch etwas Netzwerk-Programmierung dazu und fertig!
+						</small>
+					</section>
+
+					<section>
+						Was brauchen wir zum Programmieren?<br>
+						<br>
+						<ul>
+							<li>Web Browser</li>
+							<li>Terminal</li>
+							<li>Eine Suchmaschine, z.B. Google</li>
+							<li>Texteditor, oder besser: eine Entwicklungsumgebung (IDE - Integrated Development Environment)</li>
+						</ul>
+					</section>
+
+					<section>
+						Entwicklungsumgebung: Visual Studio Code<br>
+						<br>
+						<ul>
+							<li>Syntax Highlighting</li>
+							<li>Fehlersuche</li>
+							<li>Debugging</li>
+						</ul><br>
+						<br>
+						Kurze Demo...
+					</section>
+
+					<section>
+						Entwicklungsumgebung: Visual Studio Code<br>
+						<br>
+						<img src="bilder/Entwicklungsumgebung.png"><br>
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						Aufbau Schritt für Schritt!
+					</section>
+
+					<section>
+						Schritt 1: Frontend Grundgerüst<br>
+						<br>
+						Wie soll die Grundstruktur aussehen? 
+					</section>
+					
+					<section>
+						Schritt 2: Backend Grundgerüst<br>
+						<br>
+						Hinweis: <code>npm init</code>, </code>Datei <code>server.js</code> anlegen, Starten mit <code>nodejs server.js</code>, Ausgabe mit <code>console.log('Hallo, welt!')</code>
+						<br>
+						Einen Startpunkt zu Express findet Ihr auf <a href="https://gridscale.io/community/tutorials/node-js-beginner-guide/">https://gridscale.io/community/tutorials/node-js-beginner-guide/</a>.<br>
+						<br>
+						10 Minuten
+					</section>
+
+					<section>
+						Schritt 3: Webserver Grundgerüst: <code>Hallo, Welt!</code><br>
+						<br>
+						Hinweise:<br>
+						<code>nodejs server.js</code><br>
+						<code>npm install express --save</code><br>
+						<code>var express = require('express');</code><br>
+						<br>
+						Einen Startpunkt zu Express findet Ihr auf <a href="https://expressjs.com/de/starter/hello-world.html">https://expressjs.com/de/starter/hello-world.html</a>.<br>
+						<br>
+						10 Minuten
+					</section>
+
+					<section>
+						Kurze Einführung: wie funktioniert das Internet?<br>
+						<br>
+						HTTP, TCP/IP, IP-Adresse, URL, ...<br>
+					</section>
+
+					<section>
+						Schritt 4: Webserver Grundgerüst: unsere eigene Seite ausliefern<br>
+						<br>
+						Hinweise:<br>
+						Dateien aus unserem <code>client</code> Verzeichnis<br>
+						<code>app.use(express.static('../client'));</code><br>
+						<br>
+						Einen Startpunkt zu Express findet Ihr auf <a href="https://expressjs.com/de/starter/static-files.html">https://expressjs.com/de/starter/static-files.html</a>.<br>
+						<br>
+						10 Minuten
+					</section>
+
+					<section>
+						Schritt 5: Frontend: Formular zum Senden einer Nachricht<br>
+						<br>
+						Hinweise:<br>
+						Formular einfügen<br>
+						Parameter für Texteingabe: <code>an</code>, <code>text</code><br>
+						Action für Formular: <code>/senden</code><br>
+						<br>
+						Einen Startpunkt zu Formularen findet Ihr auf <a href="https://wiki.selfhtml.org/wiki/HTML/Formulare">https://wiki.selfhtml.org/wiki/HTML/Formulare</a>.<br>
+						<br>
+						10 Minuten
+					</section>
+
+					<section>
+						Schritt 6: Webserver: Nachricht empfangen und speichern<br>
+						<br>
+						Hinweise:<br>
+						<code>app.post('/senden', ...</code>><br>
+						Test mit Formular aus dem vorigen Schritt<br>
+						<br>
+						Einen Startpunkt zu Bearbeitung von HTTP-Anfragen findet Ihr auf <a href="https://expressjs.com/de/starter/basic-routing.html">https://expressjs.com/de/starter/basic-routing.html</a>.<br>
+						<br>
+						10 Minuten
+					</section>
+
+					<section>
+						Schritt 6: Webserver: Nachricht empfangen und speichern<br>
+						<br>
+						Lösung:<br>
+						
+						<pre class="javascript"><code>
+var nachrichten = [];
+// Nachricht empfangen
+app.post('/senden', function(req, res) {
+    console.log("Nachricht senden: ", req.body);
+    let nachricht = req.body;
+	let index = nachrichten.push(nachricht) - 1;
+	// Der nachricht eine Id (Index) mitgeben
+    nachricht.id = index;
+    res.redirect('/');
+});
+</code></pre>
+					</section>
+
+					<section>
+						Schritt 7: Webserver: Nachrichten abrufen<br>
+						<br>
+						Hinweise:<br>
+						<code>app.post('/nachrichten/', ...</code>><br>
+						Test durch Aufruf unseres Servers: <a href="http://localhost:8080/nachrichten/">http://localhost:8080/nachrichten/</a><br>
+						<br>
+						Einen Startpunkt zu Bearbeitung von HTTP-Anfragen findet Ihr auf <a href="https://expressjs.com/de/starter/basic-routing.html">https://expressjs.com/de/starter/basic-routing.html</a>.<br>
+						<br>
+						10 Minuten
+					</section>
+
+					<section>
+						Schritt 7: Webserver: Nachrichten abrufen<br>
+						<br>
+						Lösung:<br>
+						
+						<pre class="javascript"><code>
+// Gespeicherte Nachrichten zurück geben
+app.get('/nachrichten/', function(req, res) {
+	console.log("Nachrichten abholen: ", req.body, req.params);
+	
+	// alle nachrichten
+	let ergebnis = nachrichten;
+	res.status(200).json(ergebnis);
+});
+</code></pre>
+					</section>
+
+					<section>
+						Kurze Einführung: asynchrone Bearbeitung von Anfragen
+					</section>
+
+					<section>
+						Schritt 8: Frontend: Nachrichten abrufen und anzeigen<br>
+						<br>
+						Hinweise:<br>
+						Neue JavaScript-Datei einbinden: <code>js/index.js</code><br>
+						Abrufen der Nachrichten von <code>/nachrichten</code><br>
+						Anzeigen der Ergebnisse durch kopieren der Muster-Vorlage und Einfügen der Texte<br>
+						<br>
+						Einen Startpunkt zum Aufruf von Backend-Funktionalität findet Ihr auf <a href="https://wiki.selfhtml.org/wiki/JavaScript/Window/fetch">https://wiki.selfhtml.org/wiki/JavaScript/Window/fetch</a>.<br>
+						Und in der fertigen Datei ;-)<br>
+						<br>
+						30 Minuten
+					</section>
+
+					<section>
+						Schritt 8: Frontend: Nachrichten abrufen<br>
+						<br>
+						Lösung:<br>
+						<br>
+						<br>
+						Wir spicken in <code>webserver/fertig/server/server.js</code> :-)
+					</section>
+
+					<section>
+						Schritt 8: Frontend: Nachrichten abrufen<br>
+						<br>
+						Wir machen es bunt mit CSS!
+					</section>
+
+					<section>
+						Schritt 9: Frontend: bekannte Benutzer abrufen<br>
+						<br>
+						Hinweise:<br>
+						Benutzerdaten laden: <code>var benutzer = require('./benutzer.json');</code>
+						Daten für einen bestimmten Benutzer suchen und zurück geben<br>
+					</section>
+
+					<section>
+						Schritt 10: Frontend: Nachrichten nach Senden abrufen<br>
+					</section>
+
+					<section>
+						Schritt 11: Frontend: Nachrichten nach Senden abrufen<br>
+					</section>
+
+					<section>
+						Schickt Euch gegenseitig was!<br>
+						<br>
+						Ruft einfach mal die URL der anderen auf!<br>
+						Ruft Eure Seite mit Eurem Handy auf!<br>
+					</section>
+
+					<section>
+						Schritt 12: Frontend: etwas Komfort:<br>
+						<br>
+						Einfaches Umschalten zwischen Benutzern<br>
+						Leeren des Textfelds nach dem Abschicken<br>
+						...
+					</section>
+
+
+<!--
+					<section>
+					</section>
+-->
+					<!--
+
+* selber machen: gegenseitig den Chat aufrufen
+
+* kurze Einführung: Einbinden von Mobilgeräten (Handys): progressive Websites
+
+* selber machen: Optimierung der Webseiten für Mobilgeräte, eigenen Chat und den anderer mit Mobilgeräten aufrufen
+					-->
+					
+				</section>
+
+				<section>
+					<section>
+						Was eigentlich noch fehlt...
+					</section>
+
+					<section>
+						Progressive Rendering<br>
+						<br>
+						Optimierte Anzeige für Mobilgeräte, PCs, Fernseher, ...
+					</section>
+
+					<section>
+						Persistenz<br>
+						<br>
+						Dauerhaftes Speichern der Nachrichten in einer Datenbank
+					</section>
+
+					<section>
+						Sicherheit<br>
+						<br>
+						HTTPS (TLS/SSL)<br>
+						Anmelden<br>
+					</section>
+
+					<section>
+						Ausfallsicherheit und Skalierung<br>
+						<br>
+						Am besten ab in die Cloud! (Aber.... s. nächsten Punkt!)
+					</section>
+
+					<section>
+						Datenschutz<br>
+						<br>
+						Persönliche Daten, Privatsphäre, DSGVO!
+					</section>
+				</section>
+
+				<section>	
+					<section>
+						Was machen die Profis anders/mehr?
+					</section>
+
+					<section>
+						Interdisziplinäre Teams mit Fachleuten<br>
+						<br>
+						Entwickler, Designer, Produktmanager, Tester, ...
+					</section>
+
+					<section>
+						Qualitätssicherung<br>
+						<br>
+						Automatisierte Tests
+					</section>
+
+					<section>
+						Gemeinsames Arbeiten zur gleich Zeit am gleichen Code<br>
+						<br>
+						Versionierung (Git), web-basierte Systeme, automatische Builds
+					</section>
+
+					<section>
+						Ausführen auf zentralen Systemen<br>
+						<br>
+						lokal auf eigenem Rechner entwicklen, aber Ausführen in einem Rechenzentrum oder in der Cloud<br>
+					</section>
+				</section>
+					
+				<section>
+					<section>
+						Was man sonst noch so machen könnte...
+					</section>
+				
+
+					<section>
+						APIs und Einbinden von anderen Diensten<br>
+
+						API = Application Programming Interface
+					</section>
+					
+					<section>
+						Karten mit OpenStreetMap einbinden<br>
+						<br>
+						s. Beispiel auf https://wiki.openstreetmap.org/wiki/DE:Karte_in_Webseite_einbinden
+					</section>
+
+					<section>
+						Verwenden von Code und Bibliotheken via NPM
+					</section>
+
+					<section>
+						OpenLayers für OpenStreetMap
+					</section>
+				</section>
+
+				<section>
+					Und wie steht's mit der Sicherheit?<br>
+
+					HTTPS, SLL/TLS, Zertifikate
+				</section>
+
+				<section>
+					Und wie steht's mit dem Datenschutz?<br>
+
+					Cookies und andere (Krümel)Monster)<br>
+					Die Folgen: Werbung, Tracking
+				</section>
+
+				<section>
+					Was macht eine App anders/mehr als eine Webseite?
+				</section>
+
+				<section>
+					Was machen die Profis anders/mehr?
+				</section>
+
+				<section>
+					Fertig! Für heute zumindest...
+				</section>
+
+				<section>
+					Wie war's?<br>
+					Was hat Euch gefallen, was nicht?<br>
+					Was habt Ihr mitgenommen?<br>
+					Was probiert Ihr jetzt vielleicht selbst mal zu Hause aus?
+					Was würde Euch sonst interessieren?
+				</section>
+				
+				<section>
+					Bildquellen:<br>
+					Raspberry Pi: https://www.raspberrypi.org/homepage-9df4b/static/hero-shot-33d83b8c5fa0933373dabcc9462b32a3.png<br>
+					Raspberry Pi Logo: https://www.raspberrypi.org/trademark-rules/<br>
+					Tux Logo https://de.wikipedia.org/wiki/Datei:Tux.png<br>
+					Englische Flagge: https://de.wikipedia.org/wiki/Union_Jack#/media/Datei:Flag_of_the_United_Kingdom_(3-5).svg<br>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				hash: true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/highlight/highlight.js' },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</body>
+</html>

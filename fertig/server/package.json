@@ -1,0 +1,22 @@
+{
+  "name": "chatserver",
+  "version": "1.0.0",
+  "description": "Simple ChatServer to learn JS and node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jetztgradnet/chatserver.git"
+  },
+  "author": "Wolfgang Schell",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/jetztgradnet/chatserver/issues"
+  },
+  "homepage": "https://github.com/jetztgradnet/chatserver#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

@@ -1,0 +1,178 @@
+/*!
+ *  Font Awesome v4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
+ @import url('/css/font-awesome-css.min.css');
+ @font-face {
+   font-family: 'FontAwesome';
+   src: url('/css/fontawesome-webfont.woff2') format('woff2');
+   font-weight: normal;
+   font-style: normal;
+}
+
+body {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.kopfzeile {
+    display:flex;
+    align-items:center;
+}
+
+.logo-image {
+    float: left;
+    width: 100px;
+    border: 0;
+}
+
+.headline {
+    margin-left: 10px;
+    font-style: italic;
+}
+.inhalt {
+    padding: 0px;
+    margin: 0px;
+    background-color: white;
+}
+.profil {
+    background-color: #cff2ff;
+    width: 100%;
+    min-height: 30px;
+    display:flex;
+    align-items:center;
+    padding: 5px;
+}
+.benutzer-name {
+    font-style: italic;
+    display: none;
+}
+.lesen {
+    background-color: #d6ffd8;
+    border-width: 1px;
+    border-color: black;
+    padding: 10px;
+}
+.schreiben {
+    background-color: #ffe4cc;
+    padding: 10px;
+}
+.statusmeldung {
+    width: 100%;
+    min-height: 30px;
+    display:flex;
+    align-items:center;
+    padding: 5px;
+}
+
+.statusfehler {
+    background-color: indianred;
+}
+
+.statusok {
+    background-color: #d6ffd8;
+}
+
+.spacer {
+    width: 100%;
+    min-height: 10px;
+    border-top-color: black;
+    border-top-style: solid;
+    border-top-width: 1px;
+}
+
+.senden-text {
+    width: 100%;
+    padding: 10px;
+}
+
+.nachricht-container {
+    display: flex;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
+/* Nachrichten Flex layout */
+.nachricht {
+    width: 90%;
+    height: 100%;
+    display: flex;  
+    align-items: stretch;
+    flex-flow: row wrap;
+
+    text-align: center;
+}
+
+.eigene-nachricht {
+    justify-content: flex-end
+}
+.andere-nachricht {
+    justify-content: flex-start
+}
+
+.nachricht > * {
+    padding: 10px;
+    flex: 1 100%;
+}
+
+.nachricht-zeitstempel {
+    background: tomato;
+    color:black;
+}
+
+.nachricht-empfaenger {
+    background: lightgreen;
+}
+
+.nachricht-text {
+    flex-grow: 100;
+    text-align: left;
+    background: deepskyblue;
+}
+
+.nachricht-info {
+    width: 30px;
+    flex-basis:30px;
+    font-weight: bold;
+}
+
+.nachricht-absender {
+    background: gold;
+}
+
+.nachricht-empfaenger {
+    background: hotpink;
+}
+.nachricht-zusatz {
+    background: lightgreen;
+
+    /* deaktiviert*/
+    display: none;
+}
+
+@media all and (min-width: 600px) {
+    .nachricht-info { flex: 1 0 0; }
+}
+
+@media all and (min-width: 800px) {
+    /**/
+    .nachricht-text { flex: 3 0px; }
+    .eigene-nachricht .nachricht-absender { order: 3; } 
+    .andere-nachricht .nachricht-absender { order: 1; } 
+    .nachricht-text { order: 2; }
+    .eigene-nachricht .nachricht-empfaenger { order: 1; } 
+    .andere-nachricht .nachricht-empfaenger { order: 3; } 
+    .nachricht-zusatz  { order: 4; }
+}
+
+
+.sichtbar {
+    border: 1px solid;
+}

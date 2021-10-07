@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/styles.css">
+        <title>forum:/coding.clb: ChatServer</title>
+    </head>
+    <body>
+        <div class="kopfzeile"><a href="https://forum-mannheim.de/"><img src="forum.jpg" class="logo-image"/></a><h1 class="headline">Chat</h1></div>
+        <div class="inhalt">
+            <div class="profil">Angemeldet als &nbsp;<span id="benutzer-name" class="benutzer-name">niemand</span>
+                <select id="anmelden-benutzer" name="benutzer" type="search" placeholder="Absender" aria-label="Absender" value="" onchange="anmeldeFormularSenden(event)">
+                </select>
+                <input id="auto-aktualisieren" type="checkbox" onClick="autoAktualisierenUmschalten(event)" value="aktiv"><label for="auto-aktualisieren">Nachrichten automatisch abrufen</label>
+            </div>
+            <div class="spacer"></div>
+            <div id="statusmeldung" class="statusmeldung" style="visibility: hidden;">&nbsp;</div>
+            <div class="spacer"></div>
+            <div id="schreiben" class="schreiben">
+                <h2>Nachricht schreiben</h2>
+                <form id="senden" onsubmit="nachrichtFormularSenden(event)">
+                    <select class="senden-empfaenger" id="senden-empfaenger" name="an" type="search" placeholder="Empfänger" aria-label="An Benutzer" value="">
+                    </select>
+                    <button type="submit" aria-label="Senden"><i class="fa fa-paper-plane" aria-hidden="true"></i> Senden</button>
+                    <textarea class="senden-text" id="senden-text" name="nachricht" placeholder="Nachricht schreiben..." aria-label="Nachricht" rows="5"></textarea>
+                </form>
+            </div>
+            <div class="spacer"></div>
+            <div id="nachrichten" class="lesen">
+                <h2>Nachrichten</h2>
+                <form id="abrufen" method="POST">
+                    <button type="submit" aria-label="Neue abrufen" onclick="nachrichtenAbrufen(event)">Neue abrufen</button>
+                    <button type="submit" aria-label="Alle abrufen" onclick="nachrichtenAbrufenAlle(event)">Alle abrufen</button>
+                    <button type="submit" aria-label="Liste löschen" onclick="nachrichtenLoeschen(event)">Liste löschen</button>
+                </form>
+                <div id="nachrichten-liste">
+                    <!-- Platzhalter für Liste der empfangenen Nachrichten -->
+                    <div id="nachrichtenmuster" class="nachricht-container" style="visibility: hidden;">
+                        <div class="nachricht">
+                            <div class="nachricht-zeitstempel"><i class="fa fa-clock-o" title="Datum"></i> <span id="zeitstempel">Zeitstempel</span></div>
+                            <div class="nachricht-absender nachricht-info"><i class="fa fa-user-circle" title="Absender"></i> <span id="von">Absender</span></div>
+                            <div class="nachricht-text"><span id="nachricht">Nachricht</span></div>
+                            <div class="nachricht-empfaenger nachricht-info"><i class="fa fa-user-circle" title="Empfänger"></i> <span id="an">Empfänger</span></div>
+                            <div class="nachricht-zusatz"><span id="zusatz">Zusatz</span></div>
+                        </div>
+                    </div>
+                    <div id="nachrichtenmuster" class="nachricht-container" style="visibility: hidden;">
+                        <div class="nachricht">
+                            <div class="nachricht-zeitstempel"><i class="fa fa-clock-o" title="Datum"></i> <span id="zeitstempel">Zeitstempel</span></div>
+                            <div class="nachricht-absender nachricht-info"><i class="fa fa-user-circle" title="Absender"></i> <span id="von">Absender</span></div>
+                            <div class="nachricht-text"><span id="nachricht">Nachricht</span></div>
+                            <div class="nachricht-empfaenger nachricht-info"><i class="fa fa-user-circle" title="Empfänger"></i> <span id="an">Empfänger</span></div>
+                            <div class="nachricht-zusatz"><span id="zusatz">Zusatz</span></div>
+                        </div>
+                    </div>
+                    <div id="nachrichtenmuster" class="nachricht-container" style="visibility: hidden;">
+                        <div class="nachricht">
+                            <div class="nachricht-zeitstempel"><i class="fa fa-clock-o" title="Datum"></i> <span id="zeitstempel">Zeitstempel</span></div>
+                            <div class="nachricht-absender nachricht-info"><i class="fa fa-user-circle" title="Absender"></i> <span id="von">Absender</span></div>
+                            <div class="nachricht-text"><span id="nachricht">Nachricht</span></div>
+                            <div class="nachricht-empfaenger nachricht-info"><i class="fa fa-user-circle" title="Empfänger"></i> <span id="an">Empfänger</span></div>
+                            <div class="nachricht-zusatz"><span id="zusatz">Zusatz</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Muster für empfangene Nachrichten -->
+                <div id="nachrichtenmuster" class="nachricht-container" style="visibility: hidden;">
+                    <div class="nachricht">
+                        <div class="nachricht-zeitstempel"><i class="fa fa-clock-o" title="Datum"></i> <span id="zeitstempel">Zeitstempel</span></div>
+                        <div class="nachricht-absender nachricht-info"><i class="fa fa-user-circle" title="Absender"></i> <span id="von">Absender</span></div>
+                        <div class="nachricht-text"><span id="nachricht">Nachricht</span></div>
+                        <div class="nachricht-empfaenger nachricht-info"><i class="fa fa-user-circle" title="Empfänger"></i> <span id="an">Empfänger</span></div>
+                        <div class="nachricht-zusatz"><span id="zusatz">Zusatz</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/index.js"></script>    
+    </body>
+</html>
